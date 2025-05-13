@@ -1,0 +1,48 @@
+-- CREATE DATABASE library_managemnentdb;
+-- USE library_managemnentdb;
+
+-- -- Modified users table with additional fields
+-- CREATE TABLE users (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     username VARCHAR(50) NOT NULL UNIQUE,
+--     email VARCHAR(100) NOT NULL UNIQUE,
+--     password VARCHAR(255) NOT NULL,
+--     role ENUM('admin', 'user') NOT NULL DEFAULT 'user',
+--     full_name VARCHAR(100),
+--     phone_number VARCHAR(20),
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     status ENUM('active', 'inactive') DEFAULT 'active'
+-- );
+
+-- -- Books table with additional useful fields
+-- CREATE TABLE books (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     title VARCHAR(100) NOT NULL,
+--     author VARCHAR(100) NOT NULL,
+--     published_year INT NOT NULL,
+--     isbn VARCHAR(13),
+--     category VARCHAR(50),
+--     total_copies INT DEFAULT 1,
+--     available_copies INT DEFAULT 1,
+--     added_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     status ENUM('available', 'unavailable') DEFAULT 'available'
+-- );
+
+-- -- Enhanced borrow_records table
+-- CREATE TABLE borrow_records (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     user_id INT NOT NULL,
+--     book_id INT NOT NULL,
+--     borrowed_date DATE NOT NULL,
+--     due_date DATE NOT NULL,
+--     return_date DATE,
+--     fine_amount DECIMAL(10,2) DEFAULT 0.00,
+--     status ENUM('borrowed', 'returned', 'overdue') DEFAULT 'borrowed',
+--     FOREIGN KEY (user_id) REFERENCES users(id),
+--     FOREIGN KEY (book_id) REFERENCES books(id)
+-- );
+
+-- -- Create initial admin user (using password_hash instead of MD5 for better security)
+-- INSERT INTO users (username, email, password, role) 
+-- VALUES ('admin', 'admin@library.com', '$2y$10$8K1p/95btF6Ye6F7SyPIYOF5UHI47uMYpB8kmwrF1VsHZhHi5wTMO', 'admin');
+-- -- Note: The password hash above is for 'admin123' - you should change this in production 
